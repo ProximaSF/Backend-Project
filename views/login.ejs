@@ -1,0 +1,45 @@
+<!-- Login Page -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    
+    <!-- rel stand for relationship. stylesheet linkes to a CSS file. href = hypertext reference. -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="popup_modal" id="login_modal">
+        <div class="close_popup" title="Homepage">x</div> <!-- could just use class since the close popup button serve the same purpose in login and sign-up screen-->
+        <h1>
+            Login
+        </h1>
+        <p id="error-message"></p>
+        <form class="form" action="/login" method="post">
+            <div><input type="email" name="email" placeholder="Email" value="<%= typeof email != 'undefined' ? email: '' %>"></div>
+            
+            <div><input type="password" name="password" placeholder="Password"></div>
+            
+            <div><input type="submit"></div>        
+        </form>
+        <p>New User? <span class="signup_login" id="to-signup">Signup</span></p>
+    </div>
+
+    <div class="server-errors" style="display: none;">
+        <% if(typeof errors != 'undefined'){ %>
+          <% errors.forEach(function(error){ %>
+            <p><%= error %></p>
+          <% }) %>
+        <% } %>
+      </div>
+    
+    <!-- Use source tag to load js file-->
+    <script type="module" src="js_scripts/validation.js"></script>
+    <script type="module" src="js_scripts/login_signup.js"></script>    
+
+    
+</body>
+</html>

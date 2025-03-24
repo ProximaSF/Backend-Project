@@ -1,0 +1,61 @@
+<!-- signup Page -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    
+    <!-- rel stand for relationship. stylesheet linkes to a CSS file. href = hypertext reference. -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="popup_modal" id="signup_modal">
+        <div class="close_popup" title="Homepage">x</div> 
+        <h1>Signup</h1>
+
+        <p id="error-message"></p>
+        <form class="form" action="/signup" method="post">
+            <div> 
+                <input type="text" name="username" placeholder="Username" id="username-input" value="<%= typeof username != 'undefined' ? username: '' %>">
+            </div>
+
+            <div> 
+                <input type="email" name="email" placeholder="Email" id="signup-email-input" value="<%= typeof email != 'undefined' ? email: '' %>">
+            </div>
+
+            <div>
+                <input type="password" name="password" placeholder="Password" id="signup-password-input" value = "<%= typeof password != 'undefined' ? password: '' %>">
+            </div>
+
+            <div>
+                <input type="password" name="repeat_password" placeholder="Repeat Password" id="repeat-password-input" value = "<%= typeof repeat_password != 'undefined' ? repeat_password: '' %>">
+            </div>
+
+            <div>
+                <input type="checkbox" name="checkbox">
+                <label>By checking, you agree to the Terms and Conditions</label>
+            </div>
+
+            <div>
+                <input type="submit" placeholder="Login" id="confirm_signup">
+            </div>
+        </form>
+        <p>Already Have an Account? <span class="signup_login" id="to-login">Login</span></p>
+    </div>
+
+    <div class="server-errors" style="display: none;">
+        <% if(typeof errors != 'undefined'){ %>
+          <% errors.forEach(function(error){ %>
+            <p><%= error %></p>
+          <% }) %>
+        <% } %>
+      </div>
+    
+    <!-- Use source tag to load js file-->
+    <script type="module" src="js_scripts/validation.js"></script>
+    <script type="module" src="js_scripts/login_signup.js"></script>    
+</body>
+</html>

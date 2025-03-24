@@ -1,0 +1,188 @@
+/* Main CSS file - Consolidated styles */
+
+/* Color variables */
+:root {
+    --bg-gradient-start: rgb(255, 170, 0);
+    --bg-gradient-end: rgb(55, 255, 0);
+    --container-bg: rgba(0, 0, 0, 0.6);
+    --element-bg: rgba(0, 0, 0, 0.3);
+    --element-hover-bg: rgba(0, 0, 0, 0.5);
+    --input-bg: rgba(251, 255, 0, 0.3);
+    --login-signup-color: orange;
+}
+
+/* Body and main container styles */
+body {
+    background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#error-message{
+    color: rgb(255, 88, 88);
+}
+
+div{
+    padding: 10px;
+}
+
+/* Container that contain the heading and two buttons */ 
+.container { 
+    background-color: var(--container-bg);
+    color: white;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 20px;
+    width: 400px;
+    height: 200px;
+    padding: 10px;
+}
+
+/* Button txt style */
+.buttons { 
+    text-align: center;
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.option { /* Button box style (login & signup)*/
+    background-color: var(--element-bg);
+    border-radius: 10px;
+    width: 100px;
+    margin: 10px 30px;
+    color: var(--text-white);
+    transition: transform 0.3s, background-color 0.3s;
+    padding: 10px;
+}
+
+.option:hover { /* Button hover style */
+    background-color: var(--element-hover-bg);
+    transform: translateY(-5px);
+    cursor: pointer;
+}
+
+#login { /* change login button text color */
+    color: var(--login-signup-color);
+}
+
+#signup { /* change signup button text color */
+    color: var(--login-signup-color);
+}
+
+/* popup container style*/
+.popup_modal {
+    background-color: rgba(27, 27, 27, 0.98);
+    height: auto;
+    width: 500px;
+    color: white;
+    text-align: center;
+    border-radius: 20px;
+    position: absolute;
+    padding: 10px;
+}
+
+/* Login and signup switch beween text style */
+span{
+    color: rgb(255, 123, 0);
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+span:hover{
+    text-decoration: underline;
+}
+
+/* input style */
+input {
+    background: rgba(89, 89, 89, 0.7);
+    width: 300px;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+    border: 2px solid rgba(0, 0, 0, 0.4);
+}
+
+
+input:hover{
+    border-color: rgba(255, 201, 75, 0.7); /* Set both the border width, style and color */
+}
+
+input:focus{
+    outline: none;
+    border-color: rgba(255, 201, 75, 0.7);
+}
+
+/*  Empty input incorrect style */
+div.incorrect input{
+    border-color: red;
+}
+
+
+/* submit button style */
+input[type="submit"] {
+    color: var(--text-white);
+    width: 70px;
+    text-align: center;
+}
+
+input[type="submit"]:hover {
+    background-color: rgb(90, 90, 90);
+    cursor: pointer;
+}
+
+/* input text placeholder */
+::placeholder {
+    color: white;
+}
+
+/* Checkbox container */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* gaps between the check box and the text */
+}
+
+/* Checkbox */
+input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+}
+
+/* close button */
+.close_popup {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px; 
+    
+    color: rgb(158, 158, 158);
+    font-size: 20px;
+    text-align: center;
+
+    position: absolute;
+    top: 5px;
+    right: 10px;
+
+    cursor: pointer;
+    transition: color 0.1s;
+}
+
+.close_popup:hover{
+    color: rgba(255, 255, 255);
+}
+
+
+.username_msg{
+    font-size: 100px;
+    font-weight: 200;
+}
+
+.homepage-link{
+    font-size:25;
+}
