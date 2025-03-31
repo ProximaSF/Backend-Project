@@ -1,4 +1,4 @@
-console.log("validation.js loaded")
+console.log("Client validation.js loaded")
 
 
 document.addEventListener("DOMContentLoaded", function() {

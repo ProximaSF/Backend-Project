@@ -1,6 +1,8 @@
 /* Main CSS file - Consolidated styles */
 
 /* Color variables */
+
+/* NOTE: #name is for id and .name is for class*/
 :root {
     --bg-gradient-start: rgb(255, 170, 0);
     --bg-gradient-end: rgb(55, 255, 0);
@@ -186,3 +188,16 @@ input[type="checkbox"] {
 .homepage-link{
     font-size:25;
 }
+
+#logout {
+    color: rgb(247, 128, 0);
+    text-align: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
