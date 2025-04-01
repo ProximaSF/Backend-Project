@@ -90,31 +90,81 @@ Bash Install (if not installed) for Windows <u>inside the instance server:</u>
    
    - Once node and NVM is on the computer
    
-     - Make sure package.js is all in the directory
-   
-       ```bash
-       # Create a new directory for your project
-       mkdir my-node-project
-       cd my-node-project
-       
-       # Initialize a new Node.js project
-       npm init -y
-       ```
-     
-       
-     
      - install npm: 
-     
+   
        ```bash
        npm install
        ```
-     
-     - Install MySQL for to make the database work
-     
+   
+     - **Install MySQL for EC2 for Amazon Linux 2**
+   
        ```bash
-       sudo yum install mysql -y
+       sudo yum install -y mariadb-server
+       sudo systemctl start mariadb
+       sudo systemctl enable mariadb
        ```
+   
+       - Once installed, secure the MariaDB
      
-       
+         ```bash
+         sudo mysql_secure_installation
+         ```
      
+         When prompted:
      
+         - Enter the current password for root (just press Enter if there's no password yet)
+         - Set a root password (Honky@101)
+         - Remove anonymous users (Y)
+         - Disallow root login remotely (Y)
+         - Remove test database (Y)
+         - Reload privilege tables (Y)
+     
+       - Then create a database and user for your application:
+     
+         - Login first
+     
+         ```bash
+         sudo mysql -u root -p
+         ```
+     
+         - Create a database (will be empty when first creating an account)
+     
+           ```sql
+           CREATE DATABASE userdb;
+           ```
+     
+           ```sql
+           USE userdb;
+           ```
+     
+           
+     
+         - Create a table within the database
+     
+           ```sql
+           CREATE TABLE users (
+               id INT AUTO_INCREMENT PRIMARY KEY,
+               username VARCHAR(50) NOT NULL unique,
+               email VARCHAR(100) NOT NULL unique,
+               password VARCHAR(255) NOT NULL
+           );
+           ```
+     
+         - Check if table was created
+     
+           ```sql
+           DESCRIBE users;
+           ```
+     
+       - Create/edit .env file for the instance folder once a database and a table is created:
+     
+         ```bash
+         nano .env
+         ```
+     
+         - Than copy the same structure from the localhost .`env` file used in VSC
+     
+         - Once done press `ctrl`+`x` and select Y to save the file
+     
+           
+

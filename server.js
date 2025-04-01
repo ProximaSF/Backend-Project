@@ -140,7 +140,12 @@ pool.getConnection().then(database => {
     validations.login_validation(app, database)
 })
 
-app.listen(3000) // tell to listen on port 3000
+
+app.listen(port, '0.0.0.0', () => {
+    console.log(`Server running on port ${port}`);
+  });
+
+//app.listen(3000) // tell to listen on port 3000
 // Go to localhost:3000/homepage in the webbrowser to vist the site
 
 //Will need to reload node up update changes
