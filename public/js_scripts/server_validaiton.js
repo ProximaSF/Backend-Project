@@ -1,9 +1,13 @@
 console.log("server validation.js loaded")
 
 // Get user input values
+
 const bcrypt = require("bcrypt"); // Usd to encrypt (password)
 const jwt = require("jsonwebtoken")
 require('dotenv').config()
+
+console.log("Server validation npm stuff loaded")
+
 
 async function signup_validation(app, database){
     app.post("/signup", async (req, res) => { // "/signup" must match the action attribute name in the html form tag 
