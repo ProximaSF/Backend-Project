@@ -10,13 +10,24 @@ require("dotenv").config() // Required so can grab the values from .env file
 
 
 // Create the connection pool. The pool-specific settings are the defaults
-const pool = mysql.createPool({
-    host: process.env.MYSQL_HOST, //Database host: "127.0.0.1"
-    user: process.env.MYSQL_USER, //mySQL username: "root"
-    password: process.env.MYSQL_PASSWORD, //mySQL password
-    database: process.env.MYSQL_DATABASE // Database name, not table name
-}).promise(); // Allow the use of promis api of mysql instead of call-back function
 
+
+
+try {
+    pool = mysql.createPool({
+      host: process.env.MYSQL_HOST,
+      user: process.env.MYSQL_USER,
+      password: process.env.MYSQL_PASSWORD,
+      database: process.env.MYSQL_DATABASE,
+      waitForConnections: true,
+      connectionLimit: 10,
+      queueLimit: 0
+    }).promise();
+    
+    console.log('MySQL connection pool created successfully');
+  } catch (error) {
+    console.error('Error creating MySQL connection pool:', error);
+  }
 
 // Delete all rows from database
 async function reset_db(){

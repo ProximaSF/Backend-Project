@@ -163,8 +163,9 @@ Bash Install (if not installed) for Windows <u>inside the instance server:</u>
          ```
      
          - Than copy the same structure from the localhost .`env` file used in VSC
-     
          - Once done press `ctrl`+`x` and select Y to save the file
      
-           
+       - Run `npm run dev` to start the application
+     
+         
 
