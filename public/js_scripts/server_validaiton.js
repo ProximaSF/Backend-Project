@@ -171,7 +171,6 @@ try {
 
 } catch (err) {
     console.log(`Server validation file error: ${err}`)
-    console.log
 }
 
 // HUH
