@@ -167,5 +167,13 @@ Bash Install (if not installed) for Windows <u>inside the instance server:</u>
      
        - Run `npm run dev` to start the application
      
+         - Enter this URL to access the site
+     
+             ```html
+             http://54.197.37.129:3000/homepage
+             ```
+     
+         
+     
          
 

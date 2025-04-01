@@ -6,7 +6,6 @@ const bcrypt = require("bcrypt"); // Usd to encrypt (password)
 const jwt = require("jsonwebtoken")
 require('dotenv').config()
 
-
 try {
 
     async function signup_validation(app, database){
