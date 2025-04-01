@@ -1,4 +1,4 @@
-const validations = require("./public/js_scripts/login_signup_validaiton.js")
+const validations = require("./public/js_scripts/server_validaiton.js")
 const express = require("express")
 
 const mysql = require("mysql2");
@@ -69,19 +69,39 @@ app.use(function (req, res, next) {
 
 //---------------
 // app.get() are routs
-app.get("/homepage", (req, res) => { //request and response
+app.get("/homepage/:param?", (req, res) => { //request and response
     
+    const param = req.params.param;
+
+    if (param == "true") {
+        if (req.user) {
+            res.render("homepage", {
+                message: `${req.user.username}, click login to enter your page`
+            })
+        }
+
+    } else {
+        if (req.user) {
+            res.render("userPage", {
+                username: req.user.username
+            })
+        } else {
+            res.render("homepage", {
+                message: ''
+            }) // homepage or /homepag will both work
+        }
+    }
+})
+
+app.get("/login", (req, res) => {
+
     if (req.user) {
         res.render("userPage", {
             username: req.user.username
         })
     } else {
-        res.render("homepage") // homepage or /homepag will both work
+        res.render("login")
     }
-})
-
-app.get("/login", (req, res) => {
-    res.render("login")
 })
 
 app.get("/signup", (req, res) => {
@@ -100,7 +120,9 @@ app.get("/logout", (req, res) => {
         // Include all cookie options that were set when creating it
     });
 
-    res.render("homepage")
+    res.render("homepage", {
+        message: ''
+    })
 })
 
 
@@ -112,8 +134,6 @@ database is successfully established.
 .then() ensuring that the validation functions are only set up after the database 
 connection is available.
 */
-
-
 
 pool.getConnection().then(database => {
     validations.signup_validation(app, database)

@@ -38,7 +38,7 @@ div{
     color: white;
     border-radius: 15px;
     text-align: center;
-    font-size: 20px;
+    font-size: auto;
     width: 400px;
     height: 200px;
     padding: 10px;
@@ -190,12 +190,16 @@ input[type="checkbox"] {
 }
 
 #logout {
-    color: rgb(247, 128, 0);
+    color: var(--login-signup-color);
     text-align: center;
 
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+#homepage{
+    color: var(--login-signup-color)
 }
 
 

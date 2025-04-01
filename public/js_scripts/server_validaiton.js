@@ -1,3 +1,5 @@
+console.log("server validation.js loaded")
+
 // Get user input values
 const bcrypt = require("bcrypt"); // Usd to encrypt (password)
 const jwt = require("jsonwebtoken")
@@ -130,7 +132,7 @@ async function login_validation(app, database){ //async is for look up the datab
                 errors.push("Password is required");
         }
         else if (user && user.password && !bcrypt.compareSync(input_password, user.password)) {
-            errors.push("Incorrect password");        
+            errors.push("Email/password or both incorrect");        
         }
         
         if (errors.length){

@@ -5,15 +5,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Style</title>
+    <title>Homepage</title>
     
     <!-- rel stand for relationship. stylesheet linkes to a CSS file. href = hypertext reference. -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 
 <body>
     <div class="container">
-        <h1>Welcome</h1>
+        <h1>Welcome <%= message %></h1>
         <div class="buttons">
             <div class="option" id="login"><u>Login</u></div>
             <div class="option" id="signup"><u>Sign-up</u></div>
@@ -21,6 +21,6 @@
     </div>
 
     <!-- Use source tag to load js file-->
-    <script type="module" src="js_scripts/homepage.js"></script>    
+    <script type="module" src="/js_scripts/homepage.js"></script>    
 </body>
 </html>

@@ -99,7 +99,7 @@ function getSignupFormErros(username, email, password, repeat_password, isTermCh
         errors.push("Username is required")
         username_input.parentElement.classList.add("incorrect")
     }
-    else if (username_input.value.length <= 3 || username_input.value.length >= 10){
+    else if (username_input.value.length <= 3 || username_input.value.length > 10){
         errors.push("Username must have characters between 4-10")
         username_input.parentElement.classList.add("incorrect")
 

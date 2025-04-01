@@ -491,9 +491,112 @@ If `httpONLY = true` when making the cookie, the cookie can only be removed from
    });
    ```
 
+## Possible Attacks "Prevented"
 
+1. SQL Injection
 
+   - Attackers insert malicious SQL code into input fields to manipulate database.
+   - The prepared statements with `?` placeholders prevent this by separating code from data.
 
+2. Cross-Site Request Forgery (CSRF)
 
+   - Tricks users into performing unwanted actions on websites they're logged into.
+   - `sameSite: "strict"` cookie setting prevents other websites from making requests to the site.
 
+3. Cross-Site Scripting (XSS)
 
+   - Attackers inject malicious scripts that execute in users' browsers.
+   - EJS's `<%= %>` syntax, `httpOnly` cookies, and proper validation prevent script injection.
+
+4. Authentication Bypass
+
+   - Attackers circumvent login requirements to access protected resources.
+
+   - JWT tokens and middleware checks ensure only authenticated users can access protected routes.
+   - Client and server-side cookie management create a stronger authentication system.
+     - Same for validation login and signup
+
+5. Data Stealing Attacks
+   - `bcrypt `hashing and environment variables prevent exposure of sensitive data.
+
+6. Session Hijacking
+   - Attackers steal user session identifiers to impersonate them.
+
+7. Man-in-the-Middle Attacks
+
+   - Attackers intercept communication between users and server.
+
+   - `secure: true` cookie setting forces HTTPS, encrypting data in transit.
+
+## Other Common Web Attacks
+
+1. Insecure Direct Object References (IDOR)
+   - Attackers access resources by manipulating identifiers in URLs or forms.
+   - JWT token approach avoids exposing raw IDs in requests.
+   
+2. Security Misconfiguration
+   - Improperly configured servers or applications that leave security holes.
+   - Environment variables keep sensitive configuration separate from code.
+   
+3. Clickjacking
+   - Tricks users into clicking hidden elements on legitimate-looking pages.
+   - `sameSite: "strict"` setting helps prevent your site from being framed by attackers.
+   
+4. Command Injection
+   - User input can not be used/ interpreted as commands
+   
+     
+
+## HTML/EJS loading files
+
+When applying para when calling a router from the client side, it could lead to 404 error which might load the html/ejs but none of the style or function work. 
+
+- This is likely due to relative path (how the path is structured)
+
+- Instead, add `/` at the beginning of the file path in the html/ejs file when loading them to make the file path dynamic.
+
+  ```js
+  <!-- Instead of -->
+  <script src="homepage.js"></script>
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Use -->
+  <script src="/homepage.js"></script>
+  <link rel="stylesheet" href="/styles.css">
+  ```
+
+  
+
+Adding Parameter to Route From Client Side
+
+- add `/:param?` to add optional parameter in the route
+
+  - `?` makes the parameter optional
+
+- To assign a value to the parameter (argument), add `/argument` after the route name 
+
+  ```js
+  window.locations.href("homepage/true")
+  ```
+
+  - Note: This is for string only.
+
+  ```js
+  // In client-side
+  window.locations.href("homepage/true") 
+  // Note: "true" is a string, not a boolen value but since there is a value provided, the parameter will be true
+  
+  // In server-side
+  app.get("homepage/:param?", (req, res) => {
+      const param = req.params.param
+      if (param) { // If param have a value
+          res.render("homepage")
+      } else {
+          ...
+      }
+  })
+  ```
+
+  
+
+  
