@@ -25,7 +25,7 @@
    - Example:
 
      ```bash
-     ssh -i "First Application Validation Instance.pem" ec2-user@ec2-54-197-37-129.compute-1.amazonaws.com
+     ssh -i "Apple Bananaman Application Website Instance.pem" ec2-user@ec2-00-101-123-123.compute-1.amazonaws.com
      ```
 
    - You'll know you're connected when your terminal shows the instance's private IP instead of your local computer
