@@ -167,13 +167,19 @@ Bash Install (if not installed) for Windows <u>inside the instance server:</u>
      
        - Run `npm run dev` to start the application
      
+         - If need permission for nodemon:
+     
+             `chmod +x .repository_folder/node_modules/.bin/nodemon`
+         
+             - replace `repository_folder` with the actual folder name with the codes
+     
          - Enter this URL to access the site
      
              ```html
              http://54.197.37.129:3000/homepage
              ```
-     
          
-     
+         - If can not connect, check the `port` range in Security Group for the instance. 
+         
          
 

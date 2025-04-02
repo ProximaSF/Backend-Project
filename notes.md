@@ -3,12 +3,17 @@
 ## Node.js Basics
 
 1. **npm** = Node Package Manager - used to install and manage JavaScript packages
+   - `npm init -y` to add package.json
 2. Running a server
    - Basic method: `node server.js` in the terminal
    - Access the site by navigating to `localhost:3000` in a web browser
 3. Nodemon \- automatically restarts the server when files change:
    - Add `"dev": "nodemon server"` in the `scripts` section of `package.json`
    - Run with `npm run dev` instead of `node server.js`
+4. Install express to add `node.modules`
+   - `npm install express`
+5. Install ejs
+   - `npm install ejs`
 
 ## Template Engines
 
@@ -34,7 +39,7 @@
 
 - Set up with `app.use(express.static("public"))` in server.js
 - Express will look for files in the public folder and serve them directly
-- Contains CSS, JavaScript, images, and sometimes static HTML
+- <u>Contains CSS, JavaScript, images, and sometimes static HTML</u>
 - Served exactly as-is without processing
 - Good for unchanging resources like stylesheets, client-side scripts, etc.
 - Directly accessible through URLs
@@ -567,7 +572,7 @@ When applying para when calling a router from the client side, it could lead to 
 
   
 
-Adding Parameter to Route From Client Side
+## Adding Parameter to Route From Client Side
 
 - add `/:param?` to add optional parameter in the route
 
