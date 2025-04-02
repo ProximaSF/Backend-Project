@@ -91,8 +91,8 @@ try {
             })
     
             // Log the user and direct to user home page if no error
-            res.render("UserPage", {
-                username: username // used to display username in UserPage page
+            res.render("userPage", {
+                username: username // used to display username in userPage page
             })
         })
     }
@@ -155,7 +155,7 @@ try {
                     maxAge: 1000 * 60 * 60 * 24
                 })
     
-                res.render("UserPage", {
+                res.render("userPage", {
                     // Display username in userPage 
                     username: user.username, // row.column_name
                 })
