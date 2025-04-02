@@ -1,185 +1,179 @@
-1. After creating a instance, connect the instance using SSH
-   1. Locate the folder/directory where the token was downloaded.
-      1. Put in .SSH folder after downloading the token
-      
-   2. In Git Bash terminal enter: `chmod 400 "File_name.pem"` to enable permission
-   
-   3. Than type: `ssh -i "File_name.pem" ...amazonaws.com`
-      1. Full command should be in the SSH instruction
-      
-         `ssh -i "First Application Validation Instance.pem" ec2-user@ec2-54-197-37-129.compute-1.amazonaws.com`
-      
-   4. If successful connecting, the bash terminal should be connected to the AWS instance via a private IP address, not the local computer. 
+# AWS EC2 Linux 2 Deployment Guide
 
-Bash Install (if not installed) for Windows <u>inside the instance server:</u>
+## Connecting to Your AWS Instance
 
-1. Update package repositories and install any dependencies:
+1. **Prepare your SSH key**
 
-   ```bash
-   sudo yum update -y
-   sudo yum install git -y
-   ```
+   - Download your key file (`.pem`) from AWS
 
-2. Node.js and npm 
+   - Move the key file to your `.ssh` folder
 
-   ```bash
-   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-   source ~/.bashrc
-   nvm install node
-   ```
-
-3. Git (used for clone repository)
-
-   ```bash
-   sudo yum install git -y
-   ```
-
-   - ```bash
-     cd ~
-     git clone repository-url
-     ```
-
-4. After a successful git clone, navigate to that directory
-
-   ```bash
-   cd repository_name
-   ```
-
-   1. Check files in current directory: `ls -la`
-   2. Get current directory path: `pwd`
-
-5. Install required application dependencies
-
-   - **Install Node.js using Node Version Manager (NVM) (If not installed)**
+   - Set proper permissions for the key file:
 
      ```bash
-     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+     chmod 400 "File_name.pem"
      ```
 
-     - Activate NVM
+2. **Connect to your instance via SSH**
 
-         ```bash
-         source ~/.nvm/nvm.sh
-         source ~/.bashrc
-         ```
+   - Use the SSH command provided by AWS:
 
-     - Check if installed
+     ```bash
+     ssh -i "File_name.pem" ec2-user@ec2-xx-xxx-xx-xxx.compute-1.amazonaws.com
+     ```
 
-         ```bash
-         nvm --version
-         ```
-   
-     - Install the latest LTS version of Node.js:
-   
-       ```bash
-       nvm install --lts
-       ```
-   
-     - Check if Node.js and npm installed
-   
-       ```bash
-       node --version
-       npm --version
-       ```
-   
-       - If not try:
-   
-         ```bash
-         nvm install 16
-         ```
-   
-   - Once node and NVM is on the computer
-   
-     - install npm: 
-   
-       ```bash
-       npm install
-       ```
-   
-     - **Install MySQL for EC2 for Amazon Linux 2**
-   
-       ```bash
-       sudo yum install -y mariadb-server
-       sudo systemctl start mariadb
-       sudo systemctl enable mariadb
-       ```
-   
-       - Once installed, secure the MariaDB
-     
-         ```bash
-         sudo mysql_secure_installation
-         ```
-     
-         When prompted:
-     
-         - Enter the current password for root (just press Enter if there's no password yet)
-         - Set a root password (Honky@101)
-         - Remove anonymous users (Y)
-         - Disallow root login remotely (Y)
-         - Remove test database (Y)
-         - Reload privilege tables (Y)
-     
-       - Then create a database and user for your application:
-     
-         - Login first
-     
-         ```bash
-         sudo mysql -u root -p
-         ```
-     
-         - Create a database (will be empty when first creating an account)
-     
-           ```sql
-           CREATE DATABASE userdb;
-           ```
-     
-           ```sql
-           USE userdb;
-           ```
-     
-           
-     
-         - Create a table within the database
-     
-           ```sql
-           CREATE TABLE users (
-               id INT AUTO_INCREMENT PRIMARY KEY,
-               username VARCHAR(50) NOT NULL unique,
-               email VARCHAR(100) NOT NULL unique,
-               password VARCHAR(255) NOT NULL
-           );
-           ```
-     
-         - Check if table was created
-     
-           ```sql
-           DESCRIBE users;
-           ```
-     
-       - Create/edit .env file for the instance folder once a database and a table is created:
-     
-         ```bash
-         nano .env
-         ```
-     
-         - Than copy the same structure from the localhost .`env` file used in VSC
-         - Once done press `ctrl`+`x` and select Y to save the file
-     
-       - Run `npm run dev` to start the application
-     
-         - If need permission for nodemon:
-     
-             `chmod +x .repository_folder/node_modules/.bin/nodemon`
-         
-             - replace `repository_folder` with the actual folder name with the codes
-     
-         - Enter this URL to access the site
-     
-             ```html
-             http://54.197.37.129:3000/homepage
-             ```
-         
-         - If can not connect, check the `port` range in Security Group for the instance. 
-         
-         
+   - Example:
 
+     ```bash
+     ssh -i "First Application Validation Instance.pem" ec2-user@ec2-54-197-37-129.compute-1.amazonaws.com
+     ```
+
+   - You'll know you're connected when your terminal shows the instance's private IP instead of your local computer
+
+## Setting Up the Environment on Your EC2 Instance
+
+### 1. Update the System and Install Git
+
+```bash
+sudo yum update -y
+sudo yum install git -y
+```
+
+### 2. Install Node.js and npm using NVM
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+source ~/.bashrc
+nvm install --lts
+```
+
+- Verify installation:
+
+  ```bash
+  nvm --version
+  node --version
+  npm --version
+  ```
+
+- If needed, install a specific version:
+
+  ```bash
+  nvm install 16
+  ```
+
+### 3. Clone Your Repository
+
+```bash
+cd ~
+git clone repository-url
+```
+
+### 4. Navigate to Your Project Directory
+
+```bash
+cd repository_name
+```
+
+- Useful commands:
+
+  ```bash
+  ls -la     # List all files in current directorypwd        # Show current directory path
+  ```
+
+### 5. Install Project Dependencies
+
+```bash
+npm install
+```
+
+## Setting Up the Database (MySQL/MariaDB)
+
+### 1. Install MariaDB
+
+```bash
+sudo yum install -y mariadb-server
+sudo systemctl start mariadb
+sudo systemctl enable mariadb
+```
+
+### 2. Secure Your MariaDB Installation
+
+```bash
+sudo mysql_secure_installation
+```
+
+Follow the prompts:
+
+- Enter current root password (press Enter if none)
+- Set a root password (Example: Honky@101)
+- Remove anonymous users? (Y)
+- Disallow root login remotely? (Y)
+- Remove test database? (Y)
+- Reload privilege tables? (Y)
+
+### 3. Create a Database and Table
+
+1. Login to MySQL:
+
+   ```bash
+   sudo mysql -u root -p
+   ```
+
+2. Create and use a database:
+
+   ```sql
+   CREATE DATABASE userdb;
+   USE userdb;
+   ```
+
+3. Create a table:
+
+   ```sql
+   CREATE TABLE users (
+       id INT AUTO_INCREMENT PRIMARY KEY,
+       username VARCHAR(50) NOT NULL unique,
+       email VARCHAR(100) NOT NULL unique,
+       password VARCHAR(255) NOT NULL
+   );
+   ```
+
+4. Verify table creation:
+
+   ```sql
+   DESCRIBE users;
+   ```
+
+## Configuring Your Application
+
+### 1. Create an Environment File
+
+```bash
+nano .env
+```
+
+- Copy the structure from your local `.env` file
+- Save with `CTRL+X`, then press `Y`
+
+### 2. Start Your Application
+
+```bash
+npm run dev
+```
+
+- If you need to set permissions for nodemon:
+
+  ```bash
+  chmod +x ./node_modules/.bin/nodemon
+  ```
+
+## Accessing Your Application
+
+- Access your application via:
+
+  ```
+  http://54.197.37.129:3000/homepage
+  ```
+
+  (Replace with your actual IP address)
+
+- If you can't connect, check the port range in the Security Group settings for your EC2 instance
