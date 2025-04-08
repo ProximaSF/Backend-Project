@@ -22,7 +22,7 @@
      ssh -i "File_name.pem" ec2-user@ec2-xx-xxx-xx-xxx.compute-1.amazonaws.com
      ```
 
-   - Example:
+   - Example (code available in instance SSH setup tab)
 
      ```bash
      ssh -i "Apple Bananaman Application Website Instance.pem" ec2-user@ec2-00-101-123-123.compute-1.amazonaws.com
@@ -88,7 +88,7 @@ npm install
 
 ## Setting Up the Database (MySQL/MariaDB)
 
-### 1. Install MariaDB
+### 1. Install MariaDB (For new project folder)
 
 ```bash
 sudo yum install -y mariadb-server

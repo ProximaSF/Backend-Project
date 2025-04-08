@@ -1,5 +1,8 @@
 const validations = require("./public/js_scripts/server_validaiton.js")
+
 const express = require("express")
+const app = express()
+
 
 const mysql = require("mysql2");
 const jwt = require("jsonwebtoken");
@@ -22,7 +25,7 @@ try {
       waitForConnections: true,
       connectionLimit: 10,
       queueLimit: 0
-    }).promise();
+    }).promise();process
     
     console.log('MySQL connection pool created successfully');
   } catch (error) {
@@ -41,8 +44,6 @@ async function reset_db(){
     }
 }
 //reset_db()
-
-const app = express()
 
 app.set("view engine", "ejs")
 app.use(express.urlencoded({extended: false})) // allow the access of value in app.post() by user
@@ -158,6 +159,5 @@ app.listen(port, '0.0.0.0', () => {
   });
 
 //app.listen(3000) // tell to listen on port 3000
-// Go to localhost:3000/homepage in the webbrowser to vist the site
 
 //Will need to reload node up update changes
