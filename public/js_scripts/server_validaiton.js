@@ -7,7 +7,6 @@ const jwt = require("jsonwebtoken")
 require('dotenv').config()
 
 try {
-
     async function signup_validation(app, database){
         app.post("/signup", async (req, res) => { // "/signup" must match the action attribute name in the html form tag 
             const errors = []

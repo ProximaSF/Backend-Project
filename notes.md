@@ -57,16 +57,22 @@
 
    - Add the `action` and `method` attributes to your form: `<form action="/register" method="post">`
 
-   - Make sure each input tag has a `name` attribute
+     - The `action` attribute specifies where the form data is sent when the form is submitted, which means the data will be sent to that route on your server. 
 
+     - The `method` attribute specifies how the data is sent to the server. There are two main values:
+       - `post`: Sends the data in the HTTP request body (more secure, doesn't show in the URL)
+       - `get`: Sends the data as URL parameters (visible in the address bar)
+
+   - Make sure each input tag has a `name` attribute
+   
    - Add `app.use(express.urlencoded({extended: false}))` in `server.js` to parse form data
 
    - Access form data with `req.body.name` in your route handler:
-
+   
      - `name` is the name attribute value inside the input tag
      - **Note**: For attribute names with spaces (e.g., `name="repeat password"`), Express replaces spaces with underscores in the request body. So, a field named "repeat password" will be accessible as `req.body.repeat_passwor`
        - Best practice to add a underscore instead of a space for names
-
+   
      ```javascript
      app.post("/register", (req, res) => {
          console.log(req.body)
@@ -348,7 +354,7 @@ Use .env file to store fix values and use them in scripts. The file should **NEV
 
 Should add one after the user successfully signup and login
 
-When a user successfully signing up or login, the cookie value will be stored on the server anytime amount (hence ) and browser (anytime amount). Which can be used to determine if the user is login or not when they revisit the site instead of having to re-login (long as the cookie is stored on the browser and is valid)
+When a user successfully signing up or login, the cookie value will be stored on the server anytime amount (hence) and browser (anytime amount). Which can be used to determine if the user is login or not when they revisit the site instead of having to re-login (long as the cookie is stored on the browser and is valid)
 
 To do this, use the `res.cookie(cookie_name, cookie_value, cookie_configs)` method
 

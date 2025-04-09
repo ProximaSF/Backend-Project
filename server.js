@@ -5,7 +5,7 @@ const app = express()
 
 
 const mysql = require("mysql2");
-const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken"); // For cookies
 const cookieparser = require('cookie-parser')
 
 
@@ -13,9 +13,6 @@ require("dotenv").config() // Required so can grab the values from .env file
 
 
 // Create the connection pool. The pool-specific settings are the defaults
-
-
-
 try {
     pool = mysql.createPool({
       host: process.env.MYSQL_HOST,

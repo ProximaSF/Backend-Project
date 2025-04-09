@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
 const form = document.querySelectorAll("form")
 
 // Add event listener to each form
-// For each form in the forms collection, do the following...
+// For each form in the forms collection
 form.forEach(form => {
     form.addEventListener("submit", async (e) => {      
         
